@@ -42,15 +42,21 @@ const Conversations = () => {
   return (
     <div className="min-h-screen bg-background pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="px-4 py-4">
-          <h1 className="text-xl font-semibold">对话</h1>
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+        <div className="container max-w-2xl mx-auto px-4 py-4">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
+              <MessageCircle className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <h1 className="text-lg font-bold">对话</h1>
+          </div>
         </div>
       </header>
 
       {/* Conversations List */}
-      <div className="divide-y divide-border">
-        {mockConversations.map((conversation) => (
+      <div className="container max-w-2xl mx-auto">
+        <div className="divide-y divide-border">
+          {mockConversations.map((conversation) => (
           <div
             key={conversation.id}
             onClick={() => navigate(`/chat/${conversation.mentorId}`)}
@@ -89,7 +95,8 @@ const Conversations = () => {
               </div>
             </div>
           </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       {/* Empty State (if no conversations) */}
@@ -106,8 +113,9 @@ const Conversations = () => {
       )}
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t border-border">
-        <div className="flex items-center justify-around h-16">
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t shadow-lg">
+        <div className="container max-w-2xl mx-auto px-4">
+          <div className="flex items-center justify-around h-16">
           <button
             onClick={() => navigate("/home")}
             className="flex flex-col items-center justify-center flex-1 gap-1 text-muted-foreground hover:text-foreground transition-colors"
@@ -128,6 +136,7 @@ const Conversations = () => {
             <User className="w-5 h-5" />
             <span className="text-xs">我的</span>
           </button>
+          </div>
         </div>
       </nav>
     </div>
