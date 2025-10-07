@@ -99,7 +99,7 @@ const Home = () => {
         <div className="flex items-center gap-2">
           {/* Major Selector */}
           <Select value={selectedMajor} onValueChange={setSelectedMajor}>
-            <SelectTrigger className="w-[120px] h-11 border-0 bg-secondary/50 font-medium">
+            <SelectTrigger className="w-auto h-11 border-0 bg-secondary/50 font-medium px-3 gap-1">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
