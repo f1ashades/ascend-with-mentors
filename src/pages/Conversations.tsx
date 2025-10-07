@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { MessageCircle, Home, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MessageCircle, Home, User, FileText } from "lucide-react";
 
 // 模拟对话数据
 const mockConversations = [
@@ -48,7 +49,7 @@ const Conversations = () => {
             <div className="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
               <MessageCircle className="w-5 h-5 text-primary-foreground" />
             </div>
-            <h1 className="text-lg font-bold">对话</h1>
+            <h1 className="text-lg font-bold">我的导师</h1>
           </div>
         </div>
       </header>
@@ -59,8 +60,7 @@ const Conversations = () => {
           {mockConversations.map((conversation) => (
           <div
             key={conversation.id}
-            onClick={() => navigate(`/chat/${conversation.mentorId}`)}
-            className="px-4 py-4 hover:bg-accent/50 transition-colors cursor-pointer active:bg-accent"
+            className="px-4 py-4 border-b border-border"
           >
             <div className="flex items-start gap-3">
               {/* Avatar */}
@@ -71,26 +71,39 @@ const Conversations = () => {
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline justify-between mb-1">
-                  <h3 className="font-medium text-foreground truncate">
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="font-medium text-foreground">
                     {conversation.mentorName}
                   </h3>
-                  <span className="text-xs text-muted-foreground flex-shrink-0 ml-2">
-                    {conversation.lastMessageTime}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground mb-1 truncate">
-                  {conversation.mentorTitle}
-                </p>
-                <div className="flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground truncate flex-1">
-                    {conversation.lastMessage}
-                  </p>
                   {conversation.unreadCount > 0 && (
-                    <span className="ml-2 flex-shrink-0 bg-primary text-primary-foreground text-xs font-medium px-2 py-0.5 rounded-full">
+                    <span className="flex-shrink-0 bg-primary text-primary-foreground text-xs font-medium px-2 py-0.5 rounded-full">
                       {conversation.unreadCount}
                     </span>
                   )}
+                </div>
+                <p className="text-sm text-muted-foreground mb-3">
+                  {conversation.mentorTitle}
+                </p>
+                
+                {/* Buttons */}
+                <div className="flex gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => navigate(`/mentor/${conversation.mentorId}`)}
+                  >
+                    <FileText className="w-4 h-4 mr-1" />
+                    查看报告
+                  </Button>
+                  <Button
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => navigate(`/chat/${conversation.mentorId}`)}
+                  >
+                    <MessageCircle className="w-4 h-4 mr-1" />
+                    和他聊聊
+                  </Button>
                 </div>
               </div>
             </div>
@@ -105,9 +118,9 @@ const Conversations = () => {
           <div className="w-16 h-16 rounded-full bg-accent/50 flex items-center justify-center mb-4">
             <MessageCircle className="w-8 h-8 text-muted-foreground" />
           </div>
-          <p className="text-muted-foreground text-center">暂无对话记录</p>
+          <p className="text-muted-foreground text-center">暂无导师</p>
           <p className="text-sm text-muted-foreground text-center mt-2">
-            开始与导师对话，获取专业建议
+            开始添加导师，获取专业建议
           </p>
         </div>
       )}
@@ -126,16 +139,16 @@ const Conversations = () => {
           <button
             className="flex flex-col items-center justify-center flex-1 gap-1 text-primary"
           >
-            <MessageCircle className="w-5 h-5" />
-            <span className="text-xs font-medium">对话</span>
-          </button>
-          <button
-            onClick={() => navigate("/profile")}
-            className="flex flex-col items-center justify-center flex-1 gap-1 text-muted-foreground hover:text-foreground transition-colors"
-          >
             <User className="w-5 h-5" />
-            <span className="text-xs">我的</span>
+            <span className="text-xs font-medium">我的导师</span>
           </button>
+            <button
+              className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+              onClick={() => navigate("/profile")}
+            >
+              <User className="w-5 h-5" />
+              <span className="text-xs">我的</span>
+            </button>
           </div>
         </div>
       </nav>

@@ -158,8 +158,8 @@ const Profile = () => {
               className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
               onClick={() => navigate("/conversations")}
             >
-              <MessageCircle className="w-5 h-5" />
-              <span className="text-xs">对话</span>
+              <User className="w-5 h-5" />
+              <span className="text-xs">我的导师</span>
             </button>
             <button className="flex flex-col items-center gap-1 text-primary">
               <User className="w-5 h-5" />
