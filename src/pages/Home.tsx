@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, TrendingUp, MessageCircle, User } from "lucide-react";
+import { Search, TrendingUp, MessageCircle, User, ChevronDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Mock data
 const articles = [
@@ -49,9 +56,21 @@ const articles = [
   },
 ];
 
+const majors = [
+  { value: "all", label: "全部专业" },
+  { value: "computer", label: "计算机" },
+  { value: "finance", label: "金融" },
+  { value: "civil", label: "土木" },
+  { value: "medicine", label: "医学" },
+  { value: "law", label: "法律" },
+  { value: "business", label: "商科" },
+  { value: "education", label: "教育" },
+];
+
 const Home = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedMajor, setSelectedMajor] = useState("all");
 
   const handleMentorClick = (mentorId: number) => {
     navigate(`/mentor/${mentorId}`);
@@ -76,15 +95,32 @@ const Home = () => {
       </header>
 
       <div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
-        {/* Search */}
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <Input
-            placeholder="搜索导师姓名、行业、职位..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-11 bg-secondary/50 border-0 focus-visible:ring-primary"
-          />
+        {/* Major Selector & Search */}
+        <div className="flex items-center gap-2">
+          {/* Major Selector */}
+          <Select value={selectedMajor} onValueChange={setSelectedMajor}>
+            <SelectTrigger className="w-[120px] h-11 border-0 bg-secondary/50 font-medium">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {majors.map((major) => (
+                <SelectItem key={major.value} value={major.value}>
+                  {major.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* Search */}
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              placeholder="搜索导师姓名、行业、职位..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 h-11 bg-secondary/50 border-0 focus-visible:ring-primary"
+            />
+          </div>
         </div>
 
         {/* Article Feed */}
