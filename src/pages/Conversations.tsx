@@ -88,7 +88,7 @@ const Conversations = () => {
                     className="flex-1 h-9 text-xs font-medium border-border/60 hover:bg-secondary hover:border-primary/20 hover:text-primary transition-all"
                     onClick={(e) => {
                       e.stopPropagation();
-                      navigate(`/mentor/${conversation.mentorId}`);
+                      navigate(`/report/${conversation.mentorId}`);
                     }}
                   >
                     <FileText className="w-3.5 h-3.5 mr-1.5" />

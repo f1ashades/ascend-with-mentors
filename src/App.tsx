@@ -10,6 +10,7 @@ import MentorProfile from "./pages/MentorProfile";
 import Chat from "./pages/Chat";
 import Conversations from "./pages/Conversations";
 import Profile from "./pages/Profile";
+import CareerReport from "./pages/CareerReport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/mentor/:id" element={<MentorProfile />} />
           <Route path="/chat/:id" element={<Chat />} />
           <Route path="/conversations" element={<Conversations />} />
+          <Route path="/report/:id" element={<CareerReport />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
