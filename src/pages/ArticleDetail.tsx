@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Clock } from "lucide-react";
+import { ArrowLeft, Clock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -110,10 +110,20 @@ const ArticleDetail = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/90 border-t shadow-lg">
         <div className="container max-w-2xl mx-auto px-4 py-4">
           <Button
-            className="w-full h-12 text-base font-semibold gradient-accent hover:opacity-90 transition-opacity"
+            className="w-full h-16 gradient-accent hover:opacity-90 transition-opacity group relative overflow-hidden"
             onClick={() => navigate(`/mentor/${article.mentor.id}`)}
           >
-            与 {article.mentor.name} 聊聊
+            <div className="flex flex-col items-center justify-center gap-0.5">
+              <span className="text-base font-bold tracking-wide">
+                与 {article.mentor.name} 聊聊
+              </span>
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 opacity-90" />
+                <span className="text-xs font-medium opacity-90">
+                  获取专属报告
+                </span>
+              </div>
+            </div>
           </Button>
         </div>
       </div>
