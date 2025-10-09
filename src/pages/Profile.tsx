@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ChevronRight, Users, BookOpen, Crown, Settings, TrendingUp, MessageCircle, User } from "lucide-react";
+import { ArrowLeft, ChevronRight, User as UserIcon, Mail, Phone, Calendar, TrendingUp, MessageCircle, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -11,33 +10,31 @@ const Profile = () => {
   const user = {
     name: "微信用户",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=User",
+    phone: "138****8888",
+    email: "user@example.com",
+    joinDate: "2024年1月",
   };
 
-  const unlockedMentors = [
+  const userInfoItems = [
     {
-      id: 1,
-      name: "张明",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Zhang",
-      title: "字节跳动 · 高级产品经理",
-    },
-  ];
-
-  const menuItems = [
-    {
-      icon: Users,
-      label: "我解锁的导师",
-      count: unlockedMentors.length,
-      action: () => {},
+      icon: UserIcon,
+      label: "用户名",
+      value: user.name,
     },
     {
-      icon: BookOpen,
-      label: "阅读历史",
-      action: () => {},
+      icon: Phone,
+      label: "手机号",
+      value: user.phone,
     },
     {
-      icon: Settings,
-      label: "设置",
-      action: () => {},
+      icon: Mail,
+      label: "邮箱",
+      value: user.email,
+    },
+    {
+      icon: Calendar,
+      label: "注册时间",
+      value: user.joinDate,
     },
   ];
 
@@ -71,76 +68,30 @@ const Profile = () => {
           </div>
         </Card>
 
-        {/* VIP Banner */}
-        <Card className="p-5 bg-gradient-to-br from-accent/10 to-primary/10 border-accent/20 shadow-card">
-          <div className="flex items-center justify-between">
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <Crown className="w-5 h-5 text-accent" />
-                <h3 className="font-semibold">升级VIP会员</h3>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                解锁全部导师，享受无限制成长指导
-              </p>
-            </div>
-            <Badge variant="secondary" className="text-xs">
-              敬请期待
-            </Badge>
-          </div>
-        </Card>
-
-        {/* Menu Items */}
-        <div className="space-y-2">
-          {menuItems.map((item) => (
-            <Card
-              key={item.label}
-              className="p-4 hover:shadow-md transition-shadow cursor-pointer"
-              onClick={item.action}
-            >
-              <div className="flex items-center gap-4">
+        {/* My Information Module */}
+        <Card className="p-5 shadow-card">
+          <h3 className="font-semibold mb-4 flex items-center gap-2">
+            <UserIcon className="w-5 h-5 text-primary" />
+            我的信息
+          </h3>
+          <div className="space-y-2">
+            {userInfoItems.map((item) => (
+              <div
+                key={item.label}
+                className="flex items-center gap-4 p-3 rounded-lg hover:bg-secondary/50 transition-colors"
+              >
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <item.icon className="w-5 h-5 text-primary" />
                 </div>
-                <span className="flex-1 font-medium">{item.label}</span>
-                {item.count !== undefined && (
-                  <Badge variant="secondary" className="text-xs">
-                    {item.count}
-                  </Badge>
-                )}
-                <ChevronRight className="w-5 h-5 text-muted-foreground" />
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Unlocked Mentors Preview */}
-        {unlockedMentors.length > 0 && (
-          <Card className="p-5 shadow-card">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Users className="w-5 h-5 text-primary" />
-              已解锁的导师
-            </h3>
-            <div className="space-y-3">
-              {unlockedMentors.map((mentor) => (
-                <div
-                  key={mentor.id}
-                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-secondary/50 transition-colors cursor-pointer"
-                  onClick={() => navigate(`/chat/${mentor.id}`)}
-                >
-                  <Avatar className="w-12 h-12 border-2 border-background">
-                    <AvatarImage src={mentor.avatar} />
-                    <AvatarFallback>{mentor.name[0]}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-sm truncate">{mentor.name}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{mentor.title}</p>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-muted-foreground mb-0.5">{item.label}</p>
+                  <p className="text-sm font-medium truncate">{item.value}</p>
                 </div>
-              ))}
-            </div>
-          </Card>
-        )}
+                <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+              </div>
+            ))}
+          </div>
+        </Card>
       </div>
 
       {/* Bottom Navigation */}
