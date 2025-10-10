@@ -1,42 +1,69 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, ChevronRight, User as UserIcon, Mail, Phone, Calendar, TrendingUp, User } from "lucide-react";
+import { ArrowLeft, ChevronRight, User as UserIcon, TrendingUp, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    major: "",
+    grade: "",
+    universityType: "",
+    mbti: "",
+    goals: [] as string[],
+    customGoal: "",
+    careerDirection: "",
+    skills: "",
+  });
 
   // Mock user data
   const user = {
     name: "微信用户",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=User",
-    phone: "138****8888",
-    email: "user@example.com",
-    joinDate: "2024年1月",
   };
 
-  const userInfoItems = [
-    {
-      icon: UserIcon,
-      label: "用户名",
-      value: user.name,
-    },
-    {
-      icon: Phone,
-      label: "手机号",
-      value: user.phone,
-    },
-    {
-      icon: Mail,
-      label: "邮箱",
-      value: user.email,
-    },
-    {
-      icon: Calendar,
-      label: "注册时间",
-      value: user.joinDate,
-    },
+  const gradeOptions = [
+    "大一", "大二", "大三", "大四", 
+    "毕业1年内", "毕业1-3年", "毕业3-5年"
   ];
+
+  const mbtiTypes = [
+    "INTJ", "INTP", "ENTJ", "ENTP",
+    "INFJ", "INFP", "ENFJ", "ENFP",
+    "ISTJ", "ISFJ", "ESTJ", "ESFJ",
+    "ISTP", "ISFP", "ESTP", "ESFP",
+    "不确定"
+  ];
+
+  const goalOptions = [
+    "求职焦虑", "专业不对口", "迷茫不知道方向",
+    "想提升技术", "想转行", "想考研/考公", "想了解某个行业"
+  ];
+
+  const handleGoalChange = (goal: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      goals: checked 
+        ? [...prev.goals, goal]
+        : prev.goals.filter(g => g !== goal)
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Form data:", formData);
+    setOpen(false);
+  };
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -69,29 +96,143 @@ const Profile = () => {
         </Card>
 
         {/* My Information Module */}
-        <Card className="p-5 shadow-card">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
-            <UserIcon className="w-5 h-5 text-primary" />
-            我的信息
-          </h3>
-          <div className="space-y-0 divide-y divide-border">
-            {userInfoItems.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center gap-4 p-4 hover:bg-secondary/50 transition-colors cursor-pointer"
-              >
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Card className="p-5 shadow-card hover:bg-secondary/50 transition-colors cursor-pointer">
+              <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-5 h-5 text-primary" />
+                  <UserIcon className="w-5 h-5 text-primary" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-                  <p className="text-base font-medium truncate">{item.value}</p>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-base">我的信息</h3>
+                  <p className="text-sm text-muted-foreground">完善个人信息</p>
                 </div>
                 <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
               </div>
-            ))}
-          </div>
-        </Card>
+            </Card>
+          </DialogTrigger>
+          
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>完善个人信息</DialogTitle>
+            </DialogHeader>
+            
+            <form onSubmit={handleSubmit} className="space-y-6 py-4">
+              {/* 专业 */}
+              <div className="space-y-2">
+                <Label htmlFor="major">你的专业是？</Label>
+                <Input
+                  id="major"
+                  value={formData.major}
+                  onChange={(e) => setFormData({...formData, major: e.target.value})}
+                  placeholder="请输入你的专业"
+                />
+              </div>
+
+              {/* 年级 */}
+              <div className="space-y-2">
+                <Label htmlFor="grade">你目前是大学哪个年级/已毕业多久？</Label>
+                <Select value={formData.grade} onValueChange={(value) => setFormData({...formData, grade: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="请选择" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {gradeOptions.map((option) => (
+                      <SelectItem key={option} value={option}>{option}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* 大学类型 */}
+              <div className="space-y-2">
+                <Label>你目前就读的大学类型是？</Label>
+                <RadioGroup value={formData.universityType} onValueChange={(value) => setFormData({...formData, universityType: value})}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="985/211/双一流" id="uni1" />
+                    <Label htmlFor="uni1" className="font-normal cursor-pointer">985/211/双一流</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="普通一本" id="uni2" />
+                    <Label htmlFor="uni2" className="font-normal cursor-pointer">普通一本</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="普通二本/三本" id="uni3" />
+                    <Label htmlFor="uni3" className="font-normal cursor-pointer">普通二本/三本</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="专科" id="uni4" />
+                    <Label htmlFor="uni4" className="font-normal cursor-pointer">专科</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* MBTI */}
+              <div className="space-y-2">
+                <Label htmlFor="mbti">你的MBTI是？</Label>
+                <Select value={formData.mbti} onValueChange={(value) => setFormData({...formData, mbti: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="请选择" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {mbtiTypes.map((type) => (
+                      <SelectItem key={type} value={type}>{type}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* 困惑或目标 */}
+              <div className="space-y-2">
+                <Label>你目前最大的困惑或目标是什么？</Label>
+                <div className="space-y-2">
+                  {goalOptions.map((goal) => (
+                    <div key={goal} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={goal}
+                        checked={formData.goals.includes(goal)}
+                        onCheckedChange={(checked) => handleGoalChange(goal, checked as boolean)}
+                      />
+                      <Label htmlFor={goal} className="font-normal cursor-pointer">{goal}</Label>
+                    </div>
+                  ))}
+                </div>
+                <Input
+                  value={formData.customGoal}
+                  onChange={(e) => setFormData({...formData, customGoal: e.target.value})}
+                  placeholder="其他（自定义输入）"
+                  className="mt-2"
+                />
+              </div>
+
+              {/* 职业方向 */}
+              <div className="space-y-2">
+                <Label htmlFor="career">你有没有一些想去尝试的职业方向或心仪的公司类型？</Label>
+                <Textarea
+                  id="career"
+                  value={formData.careerDirection}
+                  onChange={(e) => setFormData({...formData, careerDirection: e.target.value})}
+                  placeholder="请输入你的想法"
+                  rows={3}
+                />
+              </div>
+
+              {/* 技能经验 */}
+              <div className="space-y-2">
+                <Label htmlFor="skills">目前你有哪些比较突出的技能、项目或实习经验？</Label>
+                <Textarea
+                  id="skills"
+                  value={formData.skills}
+                  onChange={(e) => setFormData({...formData, skills: e.target.value})}
+                  placeholder="请输入你的技能和经验"
+                  rows={4}
+                />
+              </div>
+
+              <Button type="submit" className="w-full">保存信息</Button>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Bottom Navigation */}
