@@ -20,6 +20,7 @@ const Profile = () => {
     grade: "",
     universityType: "",
     mbti: "",
+    gender: "",
     tendency: "",
     goals: [] as string[],
     customGoal: "",
@@ -183,6 +184,21 @@ const Profile = () => {
                     {mbtiTypes.map((type) => (
                       <SelectItem key={type} value={type}>{type}</SelectItem>
                     ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* 性别 */}
+              <div className="space-y-2">
+                <Label htmlFor="gender">你的性别是？</Label>
+                <Select value={formData.gender} onValueChange={(value) => setFormData({...formData, gender: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="请选择" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="男">男</SelectItem>
+                    <SelectItem value="女">女</SelectItem>
+                    <SelectItem value="不便透露">不便透露</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
