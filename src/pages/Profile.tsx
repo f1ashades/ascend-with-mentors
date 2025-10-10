@@ -16,9 +16,11 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     major: "",
+    university: "",
     grade: "",
     universityType: "",
     mbti: "",
+    tendency: "",
     goals: [] as string[],
     customGoal: "",
     careerDirection: "",
@@ -128,6 +130,17 @@ const Profile = () => {
                 />
               </div>
 
+              {/* 大学 */}
+              <div className="space-y-2">
+                <Label htmlFor="university">你的大学是？</Label>
+                <Input
+                  id="university"
+                  value={formData.university}
+                  onChange={(e) => setFormData({...formData, university: e.target.value})}
+                  placeholder="请输入你的大学"
+                />
+              </div>
+
               {/* 年级 */}
               <div className="space-y-2">
                 <Label htmlFor="grade">你目前是大学哪个年级/已毕业多久？</Label>
@@ -170,6 +183,23 @@ const Profile = () => {
                     {mbtiTypes.map((type) => (
                       <SelectItem key={type} value={type}>{type}</SelectItem>
                     ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* 倾向 */}
+              <div className="space-y-2">
+                <Label htmlFor="tendency">你的倾向？</Label>
+                <Select value={formData.tendency} onValueChange={(value) => setFormData({...formData, tendency: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="请选择" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="就业">就业</SelectItem>
+                    <SelectItem value="考研">考研</SelectItem>
+                    <SelectItem value="考公">考公</SelectItem>
+                    <SelectItem value="出国">出国</SelectItem>
+                    <SelectItem value="其它">其它</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
