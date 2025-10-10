@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
@@ -146,25 +145,18 @@ const Profile = () => {
 
               {/* 大学类型 */}
               <div className="space-y-2">
-                <Label>你目前就读的大学类型是？</Label>
-                <RadioGroup value={formData.universityType} onValueChange={(value) => setFormData({...formData, universityType: value})}>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="985/211/双一流" id="uni1" />
-                    <Label htmlFor="uni1" className="font-normal cursor-pointer">985/211/双一流</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="普通一本" id="uni2" />
-                    <Label htmlFor="uni2" className="font-normal cursor-pointer">普通一本</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="普通二本/三本" id="uni3" />
-                    <Label htmlFor="uni3" className="font-normal cursor-pointer">普通二本/三本</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="专科" id="uni4" />
-                    <Label htmlFor="uni4" className="font-normal cursor-pointer">专科</Label>
-                  </div>
-                </RadioGroup>
+                <Label htmlFor="universityType">你目前就读的大学类型是？</Label>
+                <Select value={formData.universityType} onValueChange={(value) => setFormData({...formData, universityType: value})}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="请选择" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="985/211/双一流">985/211/双一流</SelectItem>
+                    <SelectItem value="普通一本">普通一本</SelectItem>
+                    <SelectItem value="普通二本/三本">普通二本/三本</SelectItem>
+                    <SelectItem value="专科">专科</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* MBTI */}
