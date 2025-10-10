@@ -84,34 +84,15 @@ const Profile = () => {
 
       <div className="container max-w-2xl mx-auto px-4 -mt-8 space-y-4">
         {/* User Info Card */}
-        <Card className="overflow-hidden shadow-lg border-0">
-          <div className="bg-gradient-brand p-6 pb-8">
-            <div className="flex items-center gap-4">
-              <Avatar className="w-20 h-20 border-4 border-white shadow-xl ring-2 ring-primary/20">
-                <AvatarImage src={user.avatar} />
-                <AvatarFallback className="text-2xl bg-background">{user.name[0]}</AvatarFallback>
-              </Avatar>
-              <div className="flex-1 text-white">
-                <h2 className="text-xl font-bold mb-1">{user.name}</h2>
-                <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                  <span className="text-sm font-medium">普通会员</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-3 gap-4 p-4 bg-card">
-            <div className="text-center p-3 rounded-lg bg-secondary/50">
-              <div className="text-2xl font-bold text-primary mb-1">0</div>
-              <div className="text-xs text-muted-foreground">咨询次数</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-secondary/50">
-              <div className="text-2xl font-bold text-primary mb-1">0</div>
-              <div className="text-xs text-muted-foreground">导师数量</div>
-            </div>
-            <div className="text-center p-3 rounded-lg bg-secondary/50">
-              <div className="text-2xl font-bold text-primary mb-1">0</div>
-              <div className="text-xs text-muted-foreground">学习时长</div>
+        <Card className="p-6 shadow-card">
+          <div className="flex items-center gap-4">
+            <Avatar className="w-16 h-16 border-4 border-background shadow-md">
+              <AvatarImage src={user.avatar} />
+              <AvatarFallback className="text-xl">{user.name[0]}</AvatarFallback>
+            </Avatar>
+            <div className="flex-1">
+              <h2 className="text-lg font-semibold mb-1">{user.name}</h2>
+              <p className="text-sm text-muted-foreground">普通会员</p>
             </div>
           </div>
         </Card>
