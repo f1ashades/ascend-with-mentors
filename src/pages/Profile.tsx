@@ -107,18 +107,14 @@ const Profile = () => {
               </div>
             </div>
             
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-primary/10">
+            <div className="grid grid-cols-2 gap-3 pt-4 border-t border-primary/10">
               <div className="text-center">
-                <div className="text-xl font-bold text-primary">0</div>
-                <div className="text-xs text-muted-foreground mt-0.5">咨询次数</div>
-              </div>
-              <div className="text-center border-x border-primary/10">
                 <div className="text-xl font-bold text-primary">0</div>
                 <div className="text-xs text-muted-foreground mt-0.5">导师数量</div>
               </div>
-              <div className="text-center">
-                <div className="text-xl font-bold text-primary">0h</div>
-                <div className="text-xs text-muted-foreground mt-0.5">学习时长</div>
+              <div className="text-center border-l border-primary/10">
+                <div className="text-xl font-bold text-primary">0d</div>
+                <div className="text-xs text-muted-foreground mt-0.5">学习天数</div>
               </div>
             </div>
           </div>
