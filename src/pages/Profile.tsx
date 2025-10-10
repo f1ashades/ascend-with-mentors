@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, User as UserIcon, Mail, Phone, Calendar, TrendingUp, User } from "lucide-react";
+import { ArrowLeft, ChevronRight, User as UserIcon, Mail, Phone, Calendar, TrendingUp, User } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -74,11 +74,11 @@ const Profile = () => {
             <UserIcon className="w-5 h-5 text-primary" />
             我的信息
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-0 divide-y divide-border">
             {userInfoItems.map((item) => (
               <div
                 key={item.label}
-                className="flex items-center gap-4 p-3"
+                className="flex items-center gap-4 p-4 hover:bg-secondary/50 transition-colors cursor-pointer"
               >
                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <item.icon className="w-5 h-5 text-primary" />
@@ -87,6 +87,7 @@ const Profile = () => {
                   <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
                   <p className="text-base font-medium truncate">{item.value}</p>
                 </div>
+                <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
               </div>
             ))}
           </div>
