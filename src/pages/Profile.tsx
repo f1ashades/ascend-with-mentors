@@ -84,15 +84,42 @@ const Profile = () => {
 
       <div className="container max-w-2xl mx-auto px-4 -mt-8 space-y-4">
         {/* User Info Card */}
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-4">
-            <Avatar className="w-16 h-16 border-4 border-background shadow-md">
-              <AvatarImage src={user.avatar} />
-              <AvatarFallback className="text-xl">{user.name[0]}</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <h2 className="text-lg font-semibold mb-1">{user.name}</h2>
-              <p className="text-sm text-muted-foreground">普通会员</p>
+        <Card className="overflow-hidden border-2 border-primary/20 shadow-lg bg-gradient-to-br from-primary/5 via-background to-background">
+          <div className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="relative">
+                <Avatar className="w-20 h-20 border-4 border-primary shadow-xl ring-4 ring-primary/10">
+                  <AvatarImage src={user.avatar} />
+                  <AvatarFallback className="text-2xl bg-primary text-primary-foreground">{user.name[0]}</AvatarFallback>
+                </Avatar>
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-primary rounded-full border-2 border-background flex items-center justify-center">
+                  <UserIcon className="w-3 h-3 text-primary-foreground" />
+                </div>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-xl font-bold mb-1 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                  {user.name}
+                </h2>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-sm font-medium text-primary">普通会员</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-primary/10">
+              <div className="text-center">
+                <div className="text-xl font-bold text-primary">0</div>
+                <div className="text-xs text-muted-foreground mt-0.5">咨询次数</div>
+              </div>
+              <div className="text-center border-x border-primary/10">
+                <div className="text-xl font-bold text-primary">0</div>
+                <div className="text-xs text-muted-foreground mt-0.5">导师数量</div>
+              </div>
+              <div className="text-center">
+                <div className="text-xl font-bold text-primary">0h</div>
+                <div className="text-xs text-muted-foreground mt-0.5">学习时长</div>
+              </div>
             </div>
           </div>
         </Card>
