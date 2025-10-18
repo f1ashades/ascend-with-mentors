@@ -58,68 +58,70 @@ const MentorProfile = () => {
         </div>
       </header>
 
-      <div className="container max-w-2xl mx-auto px-4 py-6 space-y-6">
-        {/* Profile Card */}
-        <Card className="p-6 shadow-card">
-          <div className="flex gap-4 mb-4">
-            <Avatar className="w-20 h-20 border-4 border-background shadow-md">
-              <AvatarImage src={mentor.avatar} />
-              <AvatarFallback className="text-2xl">{mentor.name[0]}</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <h1 className="text-xl font-bold mb-1">{mentor.name}</h1>
-              <p className="text-sm text-muted-foreground mb-3">{mentor.title}</p>
-              <div className="flex flex-wrap gap-2">
-                {mentor.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
+      <div className="container max-w-2xl mx-auto px-4 py-6 space-y-4">
+        {/* Profile Header - Centered */}
+        <div className="text-center space-y-4 pb-6">
+          <Avatar className="w-24 h-24 mx-auto border-4 border-background shadow-lg">
+            <AvatarImage src={mentor.avatar} />
+            <AvatarFallback className="text-3xl">{mentor.name[0]}</AvatarFallback>
+          </Avatar>
+          <div>
+            <h1 className="text-2xl font-bold mb-2">{mentor.name}</h1>
+            <p className="text-sm text-muted-foreground mb-4">{mentor.title}</p>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {mentor.tags.map((tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
             </div>
           </div>
+        </div>
+
+        {/* Bio */}
+        <Card className="p-5 shadow-card">
           <p className="text-sm leading-relaxed text-muted-foreground">{mentor.bio}</p>
         </Card>
 
-        {/* Milestones */}
-        <Card className="p-6 shadow-card">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-primary" />
-            <h2 className="text-lg font-semibold">职业里程碑</h2>
+        {/* Details Info */}
+        <Card className="p-5 shadow-card space-y-3">
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">📍 工作城市：</span>
+            <span className="font-medium">深圳</span>
           </div>
-          <div className="space-y-4">
-            {mentor.milestones.map((milestone, index) => (
-              <div key={index} className="flex gap-4">
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-xs font-bold text-primary">{milestone.year}</span>
-                  </div>
-                  {index < mentor.milestones.length - 1 && (
-                    <div className="absolute left-1/2 top-12 bottom-0 w-0.5 bg-border -translate-x-1/2 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 pt-3">
-                  <p className="text-sm leading-relaxed">{milestone.event}</p>
-                </div>
-              </div>
-            ))}
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">🎓 学历：</span>
+            <span className="font-medium">普通一本 · 计算机</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">💼 工作经验：</span>
+            <span className="font-medium">8年</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">📈 薪资水平：</span>
+            <span className="font-medium">60W+期权</span>
           </div>
         </Card>
 
+        {/* Career Experience */}
+        <Card className="p-5 shadow-card">
+          <div className="flex items-center gap-2 mb-3">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <h2 className="font-semibold">代表性经历</h2>
+          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            毕业后在一家小创业公司做IT杂活的"新媒体小编"，每天追热点、写段子、搞抽奖，在用户只有几千人的情况下，她硬是靠着天天跟用户和组织线下活动，把一个QQ群做成了极度活跃的"铁杆粉丝群"。后来她开始总结自己做社群的SOP和方法论，并不断在各个项目中验证。因其出色的用户连接能力和从0到1的增长建设经验，被现在这家公司高薪挖走，负责整个用户增长和私域流量体系。
+          </p>
+        </Card>
+
         {/* Source Info */}
-        <Card className="p-6 shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
+        <Card className="p-5 shadow-card bg-gradient-to-br from-primary/5 to-accent/5">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
-              <Sparkles className="w-5 h-5 text-primary" />
-            </div>
+            <Sparkles className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <h3 className="font-semibold mb-2 flex items-center gap-2">
-                智慧来源
-                <CheckCircle2 className="w-4 h-4 text-success" />
-              </h3>
+              <h3 className="font-semibold mb-2 text-primary">智慧来源</h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                本数字分身基于 <span className="font-semibold text-foreground">{mentor.name}</span>{" "}
-                的真实经历、文章著作、行业见解等训练而成，能够以TA的视角为你提供专业建议和职业指导。
+                这位导师的"数字分身"由真实的行业精英深度参与创建。我们花费数十小时，将他的真实成长历程、决策逻辑、方法论完整注入AI模型，确保每一次对话都充满真实感和专业度。
               </p>
             </div>
           </div>
@@ -130,7 +132,7 @@ const MentorProfile = () => {
       <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/90 border-t shadow-lg">
         <div className="container max-w-2xl mx-auto px-4 py-4">
           <Button
-            className="w-full h-12 text-base font-semibold gradient-accent hover:opacity-90 transition-opacity"
+            className="w-full h-12 text-base font-semibold bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white transition-colors"
             onClick={handleChatClick}
           >
             {isUnlocked ? "继续与TA对话" : `与TA的数字分身对话 (¥9.9)`}
