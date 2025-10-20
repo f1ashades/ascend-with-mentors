@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Search, TrendingUp, MessageCircle, User, ChevronDown } from "lucide-react";
+import { Search, TrendingUp, MessageCircle, User, ChevronDown, Eye } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -128,42 +128,46 @@ const Home = () => {
           {articles.map((article) => (
             <Card
               key={article.id}
-              className="overflow-hidden hover:shadow-float transition-shadow duration-300 cursor-pointer"
+              className="overflow-hidden hover:shadow-float transition-shadow duration-300 cursor-pointer p-5"
+              onClick={() => handleArticleClick(article.id)}
             >
-              {/* Mentor Info - Clickable */}
-              <div
-                className="p-4 border-b bg-secondary/20 hover:bg-secondary/40 transition-colors"
-                onClick={() => handleMentorClick(article.mentor.id)}
-              >
-                <div className="flex items-center gap-3">
-                  <Avatar className="w-12 h-12 border-2 border-background">
+              {/* Article Title */}
+              <h2 className="text-base font-semibold mb-3 line-clamp-2">{article.title}</h2>
+              
+              {/* Tags */}
+              <div className="flex gap-2 mb-3">
+                {article.mentor.tags.map((tag) => (
+                  <Badge key={tag} variant="secondary" className="text-xs">
+                    #{tag}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Article Summary */}
+              <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{article.summary}</p>
+
+              {/* Mentor Info & Read Count */}
+              <div className="flex items-center justify-between">
+                <div 
+                  className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleMentorClick(article.mentor.id);
+                  }}
+                >
+                  <Avatar className="w-9 h-9">
                     <AvatarImage src={article.mentor.avatar} />
                     <AvatarFallback>{article.mentor.name[0]}</AvatarFallback>
                   </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-sm truncate">{article.mentor.name}</h3>
-                    <p className="text-xs text-muted-foreground truncate">{article.mentor.title}</p>
-                  </div>
-                  <div className="flex gap-1 flex-wrap justify-end">
-                    {article.mentor.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
+                  <div>
+                    <h3 className="font-medium text-sm">{article.mentor.name}</h3>
+                    <p className="text-xs text-muted-foreground">{article.mentor.title}</p>
                   </div>
                 </div>
-              </div>
-
-              {/* Article Content - Clickable */}
-              <div
-                className="p-4 hover:bg-secondary/10 transition-colors"
-                onClick={() => handleArticleClick(article.id)}
-              >
-                <h2 className="text-base font-semibold mb-2 line-clamp-2">{article.title}</h2>
-                <p className="text-sm text-muted-foreground line-clamp-2 mb-3">{article.summary}</p>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>{article.readCount} 阅读</span>
-                  <span className="text-primary">查看详情 →</span>
+                
+                <div className="flex items-center gap-1 text-muted-foreground">
+                  <Eye className="w-4 h-4" />
+                  <span className="text-sm">{article.readCount}</span>
                 </div>
               </div>
             </Card>
