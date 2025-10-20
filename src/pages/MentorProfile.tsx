@@ -86,6 +86,26 @@ const MentorProfile = () => {
         {/* Details Info */}
         <Card className="p-5 shadow-card space-y-3">
           <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">📚 专业：</span>
+            <span className="font-medium">计算机科学与技术</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">👥 咨询人数：</span>
+            <span className="font-medium">326人</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">⭐ 评分：</span>
+            <span className="font-medium">4.9/5.0</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">🎓 大学：</span>
+            <span className="font-medium">清华大学</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
+            <span className="text-muted-foreground">🧠 MBTI：</span>
+            <span className="font-medium">ENTJ</span>
+          </div>
+          <div className="flex items-start gap-3 text-sm">
             <span className="text-muted-foreground">📍 工作城市：</span>
             <span className="font-medium">深圳</span>
           </div>
