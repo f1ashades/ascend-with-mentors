@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
@@ -146,9 +145,6 @@ const Home = () => {
 
               {/* Article Summary */}
               <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{article.summary}</p>
-
-              {/* Separator */}
-              <Separator className="my-4" />
 
               {/* Mentor Info & Read Count */}
               <div className="flex items-center justify-between">
