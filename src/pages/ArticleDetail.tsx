@@ -108,23 +108,16 @@ const ArticleDetail = () => {
 
       {/* Bottom CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/90 border-t shadow-lg">
-        <div className="container max-w-2xl mx-auto px-4 py-4">
+        <div className="container max-w-2xl mx-auto px-4 py-4 space-y-2">
           <Button
-            className="w-full h-16 gradient-accent hover:opacity-90 transition-opacity group relative overflow-hidden"
+            className="w-full h-12 text-base font-semibold bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white transition-colors"
             onClick={() => navigate(`/mentor/${article.mentor.id}`)}
           >
-            <div className="flex flex-col items-center justify-center gap-0.5">
-              <span className="text-base font-bold tracking-wide">
-                与 {article.mentor.name} 聊聊
-              </span>
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 opacity-90" />
-                <span className="text-xs font-medium opacity-90">
-                  获取专属报告
-                </span>
-              </div>
-            </div>
+            和TA链接
           </Button>
+          <p className="text-center text-sm text-muted-foreground">
+            专属报告 + 无限答疑
+          </p>
         </div>
       </div>
     </div>

@@ -150,13 +150,16 @@ const MentorProfile = () => {
 
       {/* Bottom CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/90 border-t shadow-lg">
-        <div className="container max-w-2xl mx-auto px-4 py-4">
+        <div className="container max-w-2xl mx-auto px-4 py-4 space-y-2">
           <Button
             className="w-full h-12 text-base font-semibold bg-[#FF8C00] hover:bg-[#FF8C00]/90 text-white transition-colors"
             onClick={handleChatClick}
           >
-            {isUnlocked ? "继续与TA对话" : `与TA的数字分身对话 (¥9.9)`}
+            {isUnlocked ? "继续与TA对话" : "和TA链接"}
           </Button>
+          <p className="text-center text-sm text-muted-foreground">
+            专属报告 + 无限答疑
+          </p>
         </div>
       </div>
 
